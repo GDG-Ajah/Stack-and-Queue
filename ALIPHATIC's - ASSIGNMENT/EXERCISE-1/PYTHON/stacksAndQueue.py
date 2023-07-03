@@ -190,3 +190,63 @@ class QueueLL:
                 print(temp.data, end=" ")
                 temp = temp.next
             print()
+
+
+
+# 5. Implement a Queue using a Doubly Linked List
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
+
+class QueueDLL:
+    def __init__(self):
+        self.front = None
+        self.rear = None
+
+    def enqueue(self, data):
+        newNode = Node(data)
+        if self.rear == None:
+            self.front = newNode
+            self.rear = newNode
+        else:
+            self.rear.next = newNode
+            newNode.prev = self.rear
+            self.rear = newNode
+
+    def dequeue(self):
+        if self.front == None:
+            return "Queue is Empty"
+        else:
+            temp = self.front
+            self.front = self.front.next
+            temp.next = None
+            if self.front == None:
+                self.rear = None
+            else:
+                self.front.prev = None
+            return temp.data
+
+    def peek(self):
+        if self.front == None:
+            return "Queue is Empty"
+        else:
+            return self.front.data
+
+    def isEmpty(self):
+        if self.front == None:
+            return True
+        else:
+            return False
+
+    def printQueue(self):
+        if self.front == None:
+            print("Queue is Empty")
+        else:
+            temp = self.front
+            while temp != None:
+                print(temp.data, end=" ")
+                temp = temp.next
+            print()
+            
