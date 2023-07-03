@@ -43,3 +43,51 @@ class Stack:
 
 
             
+# 2. Implement a Stack using a Linked List
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class StackLL:
+    def __init__(self):
+        self.top = None
+
+    def push(self, data):
+        newNode = Node(data)
+        if self.top == None:
+            self.top = newNode
+        else:
+            newNode.next = self.top
+            self.top = newNode
+
+    def pop(self):
+        if self.top == None:
+            return "Stack is Empty"
+        else:
+            temp = self.top
+            self.top = self.top.next
+            temp.next = None
+            return temp.data
+
+    def peek(self):
+        if self.top == None:
+            return "Stack is Empty"
+        else:
+            return self.top.data
+
+    def isEmpty(self):
+        if self.top == None:
+            return True
+        else:
+            return False
+
+    def printStack(self):
+        if self.top == None:
+            print("Stack is Empty")
+        else:
+            temp = self.top
+            while temp != None:
+                print(temp.data, end=" ")
+                temp = temp.next
+            print()
