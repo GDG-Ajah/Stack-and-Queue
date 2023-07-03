@@ -155,3 +155,59 @@ class Queue {
     }
   }
 }
+
+
+// 4. Implement a Queue using a Linked List
+class QueueUsingLinkedList {
+  Node _front;
+  Node _rear;
+
+  void enqueue(int data) {
+    Node newNode = Node(data);
+    if (_front == null) {
+      _front = newNode;
+      _rear = newNode;
+      return;
+    }
+    _rear.next = newNode;
+    _rear = newNode;
+  }
+
+  int dequeue() {
+    if (_front == null) {
+      print('Queue is empty');
+      return -1;
+    }
+    int data = _front.data;
+    _front = _front.next;
+    if (_front == null) {
+      _rear = null;
+    }
+    return data;
+  }
+
+  int peek() {
+    if (_front == null) {
+      print('Queue is empty');
+      return -1;
+    }
+    return _front.data;
+  }
+
+  bool isEmpty() {
+    return _front == null;
+  }
+
+  void printQueue() {
+    if (_front == null) {
+      print('Queue is empty');
+      return;
+    }
+    print('Queue: ');
+    Node temp = _front;
+    while (temp != null) {
+      print(temp.data);
+      temp = temp.next;
+    }
+  }
+}
