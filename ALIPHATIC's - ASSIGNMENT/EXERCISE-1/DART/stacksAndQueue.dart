@@ -48,3 +48,57 @@ class Stack {
     }
   }
 }
+
+
+// 2. Implement a Stack using a Linked List
+class Node {
+  int data;
+  Node next;
+
+  Node(this.data);
+}
+
+class StackUsingLinkedList {
+  Node _top;
+
+  void push(int data) {
+    Node newNode = Node(data);
+    newNode.next = _top;
+    _top = newNode;
+  }
+
+  int pop() {
+    if (_top == null) {
+      print('Stack is empty');
+      return -1;
+    }
+    int data = _top.data;
+    _top = _top.next;
+    return data;
+  }
+
+  int peek() {
+    if (_top == null) {
+      print('Stack is empty');
+      return -1;
+    }
+    return _top.data;
+  }
+
+  bool isEmpty() {
+    return _top == null;
+  }
+
+  void printStack() {
+    if (_top == null) {
+      print('Stack is empty');
+      return;
+    }
+    print('Stack: ');
+    Node temp = _top;
+    while (temp != null) {
+      print(temp.data);
+      temp = temp.next;
+    }
+  }
+}
