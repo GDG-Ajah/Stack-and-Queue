@@ -211,3 +211,68 @@ class QueueUsingLinkedList {
     }
   }
 }
+
+
+// 5. Implement a Queue using a Doubly Linked List
+class Node1 {
+  int data;
+  Node1 next;
+  Node1 prev;
+
+  Node1(this.data);
+}
+
+class QueueUsingDoublyLinkedList {
+  Node1 _front;
+  Node1 _rear;
+
+  void enqueue(int data) {
+    Node1 newNode = Node1(data);
+    if (_front == null) {
+      _front = newNode;
+      _rear = newNode;
+      return;
+    }
+    _rear.next = newNode;
+    newNode.prev = _rear;
+    _rear = newNode;
+  }
+
+  int dequeue() {
+    if (_front == null) {
+      print('Queue is empty');
+      return -1;
+    }
+    int data = _front.data;
+    _front = _front.next;
+    if (_front == null) {
+      _rear = null;
+    }
+    return data;
+  }
+
+  int peek() {
+    if (_front == null) {
+      print('Queue is empty');
+      return -1;
+    }
+    return _front.data;
+  }
+
+  bool isEmpty() {
+    return _front == null;
+  }
+
+  void printQueue() {
+    if (_front == null) {
+      print('Queue is empty');
+      return;
+    }
+    print('Queue: ');
+    Node1 temp = _front;
+    while (temp != null) {
+      print(temp.data);
+      temp = temp.next;
+    }
+  }
+}
