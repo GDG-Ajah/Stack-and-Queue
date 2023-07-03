@@ -128,3 +128,62 @@ class Queue {
     }
 }
 
+
+
+// 4. Implement a Queue using a Linked List
+
+class Node {
+    constructor(element) {
+        this.element = element;
+        this.next = null;
+    }
+}
+
+class Queue {
+    constructor() {
+        this.head = null;
+        this.size = 0;
+    }
+
+    enqueue(element) {
+        var node = new Node(element);
+        if(this.head == null)
+            this.head = node;
+        else {
+            var temp = this.head;
+            while(temp.next)
+                temp = temp.next;
+            temp.next = node;
+        }
+        this.size++;
+    }
+
+    dequeue() {
+        if(this.head == null)
+            return "Underflow";
+        var temp = this.head;
+        this.head = this.head.next;
+        this.size--;
+        return temp.element;
+    }
+
+    front() {
+        if(this.head == null)
+            return "No elements in Queue";
+        return this.head.element;
+    }
+
+    isEmpty() {
+        return this.head == null;
+    }
+
+    printQueue() {
+        var str = "";
+        var temp = this.head;
+        while(temp) {
+            str += temp.element + " ";
+            temp = temp.next;
+        }
+        return str;
+    }
+}
