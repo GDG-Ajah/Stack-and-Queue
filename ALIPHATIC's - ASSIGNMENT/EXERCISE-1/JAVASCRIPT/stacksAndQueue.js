@@ -191,3 +191,64 @@ class Queue {
 
 
 // 5. Implement a Queue using a Doubly Linked List
+
+class Node {
+    constructor(element) {
+        this.element = element;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class Queue {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    enqueue(element) {
+        var node = new Node(element);
+        if(this.head == null) {
+            this.head = node;
+            this.tail = node;
+        }
+        else {
+            node.prev = this.tail;
+            this.tail.next = node;
+            this.tail = node;
+        }
+        this.size++;
+    }
+
+    dequeue() {
+        if(this.head == null)
+            return "Underflow";
+        var temp = this.head;
+        this.head = this.head.next;
+        this.head.prev = null;
+        this.size--;
+        return temp.element;
+    }
+
+    front() {
+        if(this.head == null)
+            return "No elements in Queue";
+        return this.head.element;
+    }
+
+    isEmpty() {
+        return this.head == null;
+    }
+
+    printQueue() {
+        var str = "";
+        var temp = this.head;
+        while(temp) {
+            str += temp.element + " ";
+            temp = temp.next;
+        }
+        return str;
+    }
+}
+
