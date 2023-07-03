@@ -40,3 +40,54 @@ class Stack {
     }
 }
 
+// 2. Implement a Stack using a Linked List
+class Node {
+    constructor(element) {
+        this.element = element;
+        this.next = null;
+    }
+}
+
+class Stack {
+    constructor() {
+        this.head = null;
+        this.size = 0;
+    }
+
+    push(element) {
+        var node = new Node(element);
+        node.next = this.head;
+        this.head = node;
+        this.size++;
+    }
+
+    pop() {
+        if(this.head == null)
+            return "Underflow";
+        var temp = this.head;
+        this.head = this.head.next;
+        this.size--;
+        return temp.element;
+    }
+
+    peek() {
+        if(this.head == null)
+            return "Underflow";
+        return this.head.element;
+    }
+
+    isEmpty() {
+        return this.head == null;
+    }
+
+    printStack() {
+        var str = "";
+        var temp = this.head;
+        while(temp != null) {
+            str += temp.element + " ";
+            temp = temp.next;
+        }
+        return str;
+    }
+}
+
