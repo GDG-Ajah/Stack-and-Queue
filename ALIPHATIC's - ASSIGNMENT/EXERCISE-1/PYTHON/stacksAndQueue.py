@@ -91,3 +91,53 @@ class StackLL:
                 print(temp.data, end=" ")
                 temp = temp.next
             print()
+
+
+
+# 3. Implement a Queue using an Array
+class Queue:
+    def __init__(self):
+        self.queue = []
+        self.front = -1
+        self.rear = -1
+
+    def enqueue(self, data):
+        if self.rear == -1:
+            self.front += 1
+            self.rear += 1
+            self.queue.append(data)
+        else:
+            self.rear += 1
+            self.queue.append(data)
+
+    def dequeue(self):
+        if self.front == -1:
+            return "Queue is Empty"
+        else:
+            temp = self.queue[self.front]
+            self.front += 1
+            if self.front > self.rear:
+                self.front = -1
+                self.rear = -1
+            return temp
+
+    def peek(self):
+        if self.front == -1:
+            return "Queue is Empty"
+        else:
+            return self.queue[self.front]
+
+    def isEmpty(self):
+        if self.front == -1:
+            return True
+        else:
+            return False
+
+    def printQueue(self):
+        if self.front == -1:
+            print("Queue is Empty")
+        else:
+            for i in range(self.front, self.rear+1):
+                print(self.queue[i], end=" ")
+            print()
+            
