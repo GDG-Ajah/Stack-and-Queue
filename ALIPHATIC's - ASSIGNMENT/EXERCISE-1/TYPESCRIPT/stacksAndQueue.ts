@@ -86,3 +86,30 @@ class Stack {
         return this.length === 0;
     }
     }
+
+
+// 3. Implement a Queue using an Array
+class Queue {
+    private queue: any[];
+    constructor() {
+        this.queue = [];
+    }
+    
+    enqueue(value: any) {
+        this.queue.push(value);
+    }
+    
+    dequeue() {
+        return this.queue.shift();
+    }
+    
+    peek() {
+        return this.queue[0];
+    }
+    
+    isEmpty() {
+        return this.queue.length === 0;
+    }
+    }
+
+    
