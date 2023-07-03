@@ -102,3 +102,56 @@ class StackUsingLinkedList {
     }
   }
 }
+
+
+// 3. Implement a Queue using an Array
+class Queue {
+  List _queue = [];
+  int _front = -1;
+  int _rear = -1;
+
+  void enqueue(int data) {
+    if (_front == -1) {
+      _front++;
+    }
+    _rear++;
+    _queue.add(data);
+  }
+
+  int dequeue() {
+    if (_front == -1) {
+      print('Queue is empty');
+      return -1;
+    }
+    int data = _queue[_front];
+    _queue.removeAt(_front);
+    _rear--;
+    if (_rear == -1) {
+      _front = -1;
+    }
+    return data;
+  }
+
+  int peek() {
+    if (_front == -1) {
+      print('Queue is empty');
+      return -1;
+    }
+    return _queue[_front];
+  }
+
+  bool isEmpty() {
+    return _front == -1;
+  }
+
+  void printQueue() {
+    if (_front == -1) {
+      print('Queue is empty');
+      return;
+    }
+    print('Queue: ');
+    for (int i = _front; i <= _rear; i++) {
+      print(_queue[i]);
+    }
+  }
+}
