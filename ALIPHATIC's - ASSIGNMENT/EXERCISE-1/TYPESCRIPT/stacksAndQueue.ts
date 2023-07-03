@@ -112,4 +112,59 @@ class Queue {
     }
     }
 
+
+// 4. Implement a Queue using a Linked List
+class Node {
+    value: any;
+    next: Node | null;
+    constructor(value: any) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+class Queue {
+    private first: Node | null;
+    private last: Node | null;
+    private length: number;
+    constructor() {
+        this.first = null;
+        this.last = null;
+        this.length = 0;
+    }
+    
+    peek() {
+        return this.first;
+    }
+    
+    enqueue(value: any) {
+        const newNode = new Node(value);
+        if (this.length === 0) {
+        this.first = newNode;
+        this.last = newNode;
+        } else {
+        this.last!.next = newNode;
+        this.last = newNode;
+        }
+        this.length++;
+        return this;
+    }
+    
+    dequeue() {
+        if (!this.first) {
+        return null;
+        }
+        if (this.first === this.last) {
+        this.last = null;
+        }
+        this.first = this.first.next;
+        this.length--;
+        return this;
+    }
+    
+    isEmpty() {
+        return this.length === 0;
+    }
+    }
+
     
