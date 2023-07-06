@@ -85,3 +85,12 @@ class MinStack {
   }
 
   
+  const minStack = new MinStack();
+  minStack.push(5);
+  minStack.push(2);
+  minStack.push(8);
+  minStack.push(1);
+  minStack.pop();
+  const topElement = minStack.top();  // Returns 8
+  const minimumElement = minStack.getMin();  // Returns 2
+  
