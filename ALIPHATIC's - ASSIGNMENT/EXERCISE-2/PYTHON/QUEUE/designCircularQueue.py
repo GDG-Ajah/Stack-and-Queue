@@ -44,49 +44,48 @@
 # 0 <= value <= 1000
 # At most 3000 calls will be made to enQueue, deQueue, Front, Rear, isEmpty, and isFull.
 
-class MyCircularQueue(object):
+class MyCircularQueue:
+    def __init__(self, k: int):
+        self.queue = [0] * k
+        self.front = -1
+        self.rear = -1
+        self.size = k
 
-    def __init__(self, k):
-        """
-        :type k: int
-        """
-        
+    def enQueue(self, value: int) -> bool:
+        if self.isFull():
+            return False
+        if self.isEmpty():
+            self.front = 0
+        self.rear = (self.rear + 1) % self.size
+        self.queue[self.rear] = value
+        return True
 
-    def enQueue(self, value):
-        """
-        :type value: int
-        :rtype: bool
-        """
-        
+    def deQueue(self) -> bool:
+        if self.isEmpty():
+            return False
+        if self.front == self.rear:
+            self.front = -1
+            self.rear = -1
+            return True
+        self.front = (self.front + 1) % self.size
+        return True
 
-    def deQueue(self):
-        """
-        :rtype: bool
-        """
-        
+    def Front(self) -> int:
+        if self.isEmpty():
+            return -1
+        return self.queue[self.front]
 
-    def Front(self):
-        """
-        :rtype: int
-        """
-        
+    def Rear(self) -> int:
+        if self.isEmpty():
+            return -1
+        return self.queue[self.rear]
 
-    def Rear(self):
-        """
-        :rtype: int
-        """
-        
+    def isEmpty(self) -> bool:
+        return self.front == -1
 
-    def isEmpty(self):
-        """
-        :rtype: bool
-        """
-        
+    def isFull(self) -> bool:
+        return (self.rear + 1) % self.size == self.front
 
-    def isFull(self):
-        """
-        :rtype: bool
-        """
         
 
 
@@ -98,3 +97,14 @@ class MyCircularQueue(object):
 # param_4 = obj.Rear()
 # param_5 = obj.isEmpty()
 # param_6 = obj.isFull()
+
+myCircularQueue = MyCircularQueue(3)
+myCircularQueue.enQueue(1)  # Returns True
+myCircularQueue.enQueue(2)  # Returns True
+myCircularQueue.enQueue(3)  # Returns True
+myCircularQueue.enQueue(4)  # Returns False
+myCircularQueue.Rear()      # Returns 3
+myCircularQueue.isFull()    # Returns True
+myCircularQueue.deQueue()   # Returns True
+myCircularQueue.enQueue(4)  # Returns True
+myCircularQueue.Rear()      # Returns 4

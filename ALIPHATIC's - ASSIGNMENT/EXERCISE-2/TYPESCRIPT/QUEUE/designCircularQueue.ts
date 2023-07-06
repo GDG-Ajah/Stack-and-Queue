@@ -44,36 +44,67 @@ Constraints:
 At most 3000 calls will be made to enQueue, deQueue, Front, Rear, isEmpty, and isFull.
  */
 
-
 class MyCircularQueue {
+    private queue: number[];
+    private front: number;
+    private rear: number;
+    private size: number;
+  
     constructor(k: number) {
-
+      this.queue = new Array(k);
+      this.front = -1;
+      this.rear = -1;
+      this.size = k;
     }
-
+  
     enQueue(value: number): boolean {
-
+      if (this.isFull()) {
+        return false;
+      }
+      if (this.isEmpty()) {
+        this.front = 0;
+      }
+      this.rear = (this.rear + 1) % this.size;
+      this.queue[this.rear] = value;
+      return true;
     }
-
+  
     deQueue(): boolean {
-
+      if (this.isEmpty()) {
+        return false;
+      }
+      if (this.front === this.rear) {
+        this.front = -1;
+        this.rear = -1;
+        return true;
+      }
+      this.front = (this.front + 1) % this.size;
+      return true;
     }
-
+  
     Front(): number {
-
+      if (this.isEmpty()) {
+        return -1;
+      }
+      return this.queue[this.front];
     }
-
+  
     Rear(): number {
-
+      if (this.isEmpty()) {
+        return -1;
+      }
+      return this.queue[this.rear];
     }
-
+  
     isEmpty(): boolean {
-
+      return this.front === -1;
     }
-
+  
     isFull(): boolean {
-
+      return (this.rear + 1) % this.size === this.front;
     }
-}
+  }
+  
 
 /**
  * Your MyCircularQueue object will be instantiated and called as such:
@@ -85,3 +116,15 @@ class MyCircularQueue {
  * var param_5 = obj.isEmpty()
  * var param_6 = obj.isFull()
  */
+
+
+const myCircularQueue = new MyCircularQueue(3);
+myCircularQueue.enQueue(1);  // Returns true
+myCircularQueue.enQueue(2);  // Returns true
+myCircularQueue.enQueue(3);  // Returns true
+myCircularQueue.enQueue(4);  // Returns false
+myCircularQueue.Rear();      // Returns 3
+myCircularQueue.isFull();    // Returns true
+myCircularQueue.deQueue();   // Returns true
+myCircularQueue.enQueue(4);  // Returns true
+myCircularQueue.Rear();      // Returns 4

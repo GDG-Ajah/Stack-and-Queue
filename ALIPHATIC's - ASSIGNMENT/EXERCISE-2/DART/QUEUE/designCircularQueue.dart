@@ -44,38 +44,67 @@
 // 0 <= value <= 1000
 // At most 3000 calls will be made to enQueue, deQueue, Front, Rear, isEmpty, and isFull.
 
-
 class MyCircularQueue {
+  List<int> queue;
+  int front;
+  int rear;
+  int size;
 
-    MyCircularQueue(int k) {
-  
-    }
-    
-    bool enQueue(int value) {
-  
-    }
-    
-    bool deQueue() {
-  
-    }
-    
-    int Front() {
-  
-    }
-    
-    int Rear() {
-  
-    }
-    
-    bool isEmpty() {
-  
-    }
-    
-    bool isFull() {
-  
-    }
+  MyCircularQueue(int k) {
+    queue = List<int>.filled(k, 0);
+    front = -1;
+    rear = -1;
+    size = k;
   }
-  
+
+  bool enQueue(int value) {
+    if (isFull()) {
+      return false;
+    }
+    if (isEmpty()) {
+      front = 0;
+    }
+    rear = (rear + 1) % size;
+    queue[rear] = value;
+    return true;
+  }
+
+  bool deQueue() {
+    if (isEmpty()) {
+      return false;
+    }
+    if (front == rear) {
+      front = -1;
+      rear = -1;
+      return true;
+    }
+    front = (front + 1) % size;
+    return true;
+  }
+
+  int Front() {
+    if (isEmpty()) {
+      return -1;
+    }
+    return queue[front];
+  }
+
+  int Rear() {
+    if (isEmpty()) {
+      return -1;
+    }
+    return queue[rear];
+  }
+
+  bool isEmpty() {
+    return front == -1;
+  }
+
+  bool isFull() {
+    return (rear + 1) % size == front;
+  }
+}
+
   /**
    * Your MyCircularQueue object will be instantiated and called as such:
    * MyCircularQueue obj = MyCircularQueue(k);
@@ -86,3 +115,14 @@ class MyCircularQueue {
    * bool param5 = obj.isEmpty();
    * bool param6 = obj.isFull();
    */
+
+  MyCircularQueue myCircularQueue = MyCircularQueue(3);
+myCircularQueue.enQueue(1);  // Returns true
+myCircularQueue.enQueue(2);  // Returns true
+myCircularQueue.enQueue(3);  // Returns true
+myCircularQueue.enQueue(4);  // Returns false
+myCircularQueue.Rear();      // Returns 3
+myCircularQueue.isFull();    // Returns true
+myCircularQueue.deQueue();   // Returns true
+myCircularQueue.enQueue(4);  // Returns true
+myCircularQueue.Rear();      // Returns 4

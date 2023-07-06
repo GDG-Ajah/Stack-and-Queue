@@ -44,56 +44,62 @@ Constraints:
 At most 3000 calls will be made to enQueue, deQueue, Front, Rear, isEmpty, and isFull.
  */
 
-/**
- * @param {number} k
- */
-var MyCircularQueue = function(k) {
-    
-};
-
-/** 
- * @param {number} value
- * @return {boolean}
- */
-MyCircularQueue.prototype.enQueue = function(value) {
-    
-};
-
-/**
- * @return {boolean}
- */
-MyCircularQueue.prototype.deQueue = function() {
-    
-};
-
-/**
- * @return {number}
- */
-MyCircularQueue.prototype.Front = function() {
-    
-};
-
-/**
- * @return {number}
- */
-MyCircularQueue.prototype.Rear = function() {
-    
-};
-
-/**
- * @return {boolean}
- */
-MyCircularQueue.prototype.isEmpty = function() {
-    
-};
-
-/**
- * @return {boolean}
- */
-MyCircularQueue.prototype.isFull = function() {
-    
-};
-
+class MyCircularQueue {
+    constructor(k) {
+      this.queue = new Array(k);
+      this.front = -1;
+      this.rear = -1;
+      this.size = k;
+    }
+  
+    enQueue(value) {
+      if (this.isFull()) {
+        return false;
+      }
+      if (this.isEmpty()) {
+        this.front = 0;
+      }
+      this.rear = (this.rear + 1) % this.size;
+      this.queue[this.rear] = value;
+      return true;
+    }
+  
+    deQueue() {
+      if (this.isEmpty()) {
+        return false;
+      }
+      if (this.front === this.rear) {
+        this.front = -1;
+        this.rear = -1;
+        return true;
+      }
+      this.front = (this.front + 1) % this.size;
+      return true;
+    }
+  
+    Front() {
+      if (this.isEmpty()) {
+        return -1;
+      }
+      return this.queue[this.front];
+    }
+  
+    Rear() {
+      if (this.isEmpty()) {
+        return -1;
+      }
+      return this.queue[this.rear];
+    }
+  
+    isEmpty() {
+      return this.front === -1;
+    }
+  
+    isFull() {
+      return (this.rear + 1) % this.size === this.front;
+    }
+  }
+  
 /** 
  * Your MyCircularQueue object will be instantiated and called as such:
  * var obj = new MyCircularQueue(k)
@@ -104,3 +110,15 @@ MyCircularQueue.prototype.isFull = function() {
  * var param_5 = obj.isEmpty()
  * var param_6 = obj.isFull()
  */
+
+
+const myCircularQueue = new MyCircularQueue(3);
+myCircularQueue.enQueue(1);  // Returns true
+myCircularQueue.enQueue(2);  // Returns true
+myCircularQueue.enQueue(3);  // Returns true
+myCircularQueue.enQueue(4);  // Returns false
+myCircularQueue.Rear();      // Returns 3
+myCircularQueue.isFull();    // Returns true
+myCircularQueue.deQueue();   // Returns true
+myCircularQueue.enQueue(4);  // Returns true
+myCircularQueue.Rear();      // Returns 4
