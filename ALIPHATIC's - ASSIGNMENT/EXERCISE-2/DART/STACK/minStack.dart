@@ -40,3 +40,54 @@
 // At most 3 * 104 calls will be made to push, pop, top, and getMin.
 // Hint #1  
 // Consider each node in the stack having a minimum value. 
+
+
+class MinStack {
+  List<int> stack;
+  List<int> minStack;
+
+  MinStack() {
+    stack = [];
+    minStack = [];
+  }
+
+  void push(int val) {
+    stack.add(val);
+    if (minStack.isEmpty || val <= minStack.last) {
+      minStack.add(val);
+    }
+  }
+
+  void pop() {
+    if (stack.isNotEmpty) {
+      int poppedElement = stack.removeLast();
+      if (poppedElement == minStack.last) {
+        minStack.removeLast();
+      }
+    }
+  }
+
+  int top() {
+    if (stack.isNotEmpty) {
+      return stack.last;
+    }
+    return null;
+  }
+
+  int getMin() {
+    if (minStack.isNotEmpty) {
+      return minStack.last;
+    }
+    return null;
+  }
+}
+
+
+MinStack minStack = MinStack();
+minStack.push(5);
+minStack.push(2);
+minStack.push(8);
+minStack.push(1);
+minStack.pop();
+int topElement = minStack.top();  // Returns 8
+int minimumElement = minStack.getMin();  // Returns 2
